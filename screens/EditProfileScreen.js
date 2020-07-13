@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {
   Text,
   StyleSheet,
@@ -13,20 +13,54 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import BottomSheet from 'reanimated-bottom-sheet';
+import ImagePicker from 'react-native-image-crop-picker';
 
 const EditProfileScreen = ({navigation}) => {
+  const [image, setImage] = useState(
+    'https://api.adorable.io/avatars/80/abott@adorable.png',
+  );
+
   const {colors} = useTheme();
 
-  renderInner = () => (
+  const takePhotoFromCamera = () => {
+    ImagePicker.openCamera({
+      compressImageMaxWidth: 300,
+      compressImageMaxHeight: 300,
+      cropping: true,
+    }).then((image) => {
+      console.log(image);
+      setImage(image.path);
+      this.bs.current.snapTo(1);
+    });
+  };
+
+  const choosePhotoFromLibrary = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 300,
+      cropping: true,
+      compressImageQuality: 0.7,
+    }).then((image) => {
+      console.log(image);
+      setImage(image.path);
+      this.bs.current.snapTo(1);
+    });
+  };
+
+  const renderInner = () => (
     <View style={styles.panel}>
       <View style={{alignItems: 'center'}}>
         <Text style={styles.panelTitle}>Upload Photo</Text>
         <Text style={styles.panelSubtitle}>Choose Your Profile Picture</Text>
       </View>
-      <TouchableOpacity style={styles.panelButton}>
+      <TouchableOpacity
+        style={styles.panelButton}
+        onPress={takePhotoFromCamera}>
         <Text style={styles.panelButtonTitle}>Take Photo</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.panelButton}>
+      <TouchableOpacity
+        style={styles.panelButton}
+        onPress={choosePhotoFromLibrary}>
         <Text style={styles.panelButtonTitle}>Choose From Library</Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -37,7 +71,7 @@ const EditProfileScreen = ({navigation}) => {
     </View>
   );
 
-  renderHeader = () => (
+  const renderHeader = () => (
     <View style={styles.header}>
       <View style={styles.panelHeader}>
         <View style={styles.panelHandle} />
@@ -53,8 +87,8 @@ const EditProfileScreen = ({navigation}) => {
       <BottomSheet
         ref={this.bs}
         snapPoints={[330, 0]}
-        renderContent={this.renderInner}
-        renderHeader={this.renderHeader}
+        renderContent={renderInner}
+        renderHeader={renderHeader}
         initialSnap={1}
         callbackNode={this.fall}
         enabledGestureInteraction={true}
@@ -71,7 +105,7 @@ const EditProfileScreen = ({navigation}) => {
             }}>
             <ImageBackground
               source={{
-                uri: 'https://api.adorable.io/avatars/80/abott@adorable.png',
+                uri: image,
               }}
               style={{height: 100, width: 100}}
               imageStyle={{borderRadius: 15}}>
