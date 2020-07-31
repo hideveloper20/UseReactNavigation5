@@ -5595,6 +5595,11 @@ react-native-screens@^2.4.0:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.8.0.tgz#9f989096fc5ccf248e0dfa93a74f1a64057e15f1"
   integrity sha512-fUCIQLZX+5XB0ypWX038P3zso54IFFjTsQUZJWEsjC3pp5rPItAt5SzqtJn+uVjcJaczZ+dpIuvj6IFLqkWLZQ==
 
+react-native-share@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-3.7.0.tgz#5b5bcc87530ddaaabcb8b70a9366dce88a6f9495"
+  integrity sha512-MCTGiPcBfelrnX/7n82N5eQAl31F6xljqFK2CWbPDTSt7bbJUZH3Znvy8KYePLYqAr7HVrk621eanQN6vSFMzA==
+
 react-native-swipe-list-view@^3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/react-native-swipe-list-view/-/react-native-swipe-list-view-3.2.3.tgz#2b4aa361f26b6e55efe38a829ce122dff6c00292"

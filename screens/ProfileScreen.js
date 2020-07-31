@@ -10,7 +10,26 @@ import {
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import Share from 'react-native-share';
+
+import files from '../assets/filesBase64';
+
 const ProfileScreen = () => {
+  const myCustomShare = async () => {
+    const shareOptions = {
+      message: 'Test Message',
+      url: files.image1,
+      // urls: [files.image1, files.image2]
+    };
+
+    try {
+      const ShareResponse = await Share.open(shareOptions);
+      console.log(JSON.stringify(ShareResponse));
+    } catch (error) {
+      console.log('Error => ', error);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.userInfoSection}>
@@ -83,7 +102,7 @@ const ProfileScreen = () => {
             <Text style={styles.menuItemText}>Payment</Text>
           </View>
         </TouchableRipple>
-        <TouchableRipple onPress={() => {}}>
+        <TouchableRipple onPress={myCustomShare}>
           <View style={styles.menuItem}>
             <Icon name="share-outline" color="#FF6347" size={25} />
             <Text style={styles.menuItemText}>Tell Your Friends</Text>
