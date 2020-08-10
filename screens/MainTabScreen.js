@@ -8,7 +8,7 @@ import {
   StatusBar,
   Button,
 } from 'react-native';
-import {useTheme} from 'react-native-paper';
+import {useTheme, Avatar} from 'react-native-paper';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -23,6 +23,7 @@ import BookMarkScreen from './BookMarkScreen';
 import ProfileScreen from './ProfileScreen';
 import ExplorerScreen from './ExplorerScreen';
 import EditProfileScreen from './EditProfileScreen';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Tab = createMaterialBottomTabNavigator();
 const HomeStack = createStackNavigator();
@@ -76,33 +77,63 @@ const MainTabScreen = () => (
     />
   </Tab.Navigator>
 );
-const HomeStackScreen = ({navigation}) => (
-  <HomeStack.Navigator
-    screenOptions={{
-      headerStyle: {
-        backgroundColor: '#009387',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    }}>
-    <HomeStack.Screen
-      name="Home"
-      component={HomeScreen}
-      options={{
-        title: 'OverView',
-        headerLeft: () => (
-          <Icon.Button
-            name="menu"
-            size={25}
-            backgroundColor="#009387"
-            onPress={() => navigation.openDrawer()}></Icon.Button>
-        ),
-      }}
-    />
-  </HomeStack.Navigator>
-);
+const HomeStackScreen = ({navigation}) => {
+  const {colors} = useTheme();
+  return (
+    <HomeStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: colors.background,
+          shadowColor: colors.background, //ios
+          elevation: 0, //android
+        },
+        headerTintColor: colors.text,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}>
+      <HomeStack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          title: 'Food Finder',
+          headerLeft: () => (
+            <View style={{marginLeft: 10}}>
+              <Icon.Button
+                name="menu"
+                size={25}
+                color={colors.text}
+                backgroundColor={colors.background}
+                onPress={() => navigation.openDrawer()}></Icon.Button>
+            </View>
+          ),
+          headerRight: () => (
+            <View style={{flexDirection: 'row', marginRight: 10}}>
+              <Icon.Button
+                name="search"
+                size={25}
+                color={colors.text}
+                backgroundColor={colors.background}
+                onPress={() => {}}
+              />
+              <TouchableOpacity
+                style={{paddingHorizontal: 10, marginTop: 5}}
+                onPress={() => navigation.navigate('Profile')}>
+                <Avatar.Image
+                  source={{
+                    uri:
+                      'https://api.adorable.io/avatars/80/abott@adorable.png',
+                  }}
+                  size={30}
+                />
+              </TouchableOpacity>
+            </View>
+          ),
+        }}
+      />
+    </HomeStack.Navigator>
+  );
+};
 
 const DetailsStackScreen = ({navigation}) => (
   <DetailsStack.Navigator
@@ -141,7 +172,7 @@ const ProfileStackScreen = ({navigation}) => {
           shadowColor: colors.background, //ios
           elevation: 0, //android
         },
-        headerTintColor: colors.background,
+        headerTintColor: colors.text,
       }}>
       <ProfileStack.Screen
         name="Profile"
