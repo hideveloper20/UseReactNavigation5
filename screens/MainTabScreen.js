@@ -23,7 +23,9 @@ import BookMarkScreen from './BookMarkScreen';
 import ProfileScreen from './ProfileScreen';
 import ExplorerScreen from './ExplorerScreen';
 import EditProfileScreen from './EditProfileScreen';
+import CardListScreen from './CardListScreen';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import CardItemDetails from './CardItemDetails';
 
 const Tab = createMaterialBottomTabNavigator();
 const HomeStack = createStackNavigator();
@@ -130,6 +132,25 @@ const HomeStackScreen = ({navigation}) => {
             </View>
           ),
         }}
+      />
+      <HomeStack.Screen
+        name="CardListScreen"
+        component={CardListScreen}
+        options={({route}) => ({
+          title: route.params.title,
+          headerBackTitleVisible: false,
+        })}
+      />
+      <HomeStack.Screen
+        name="CardItemDetails"
+        component={CardItemDetails}
+        options={({route}) => ({
+          // title: route.params.title,
+          headerBackTitleVisible: false,
+          headerTitle: false,
+          headerTransparent: true,
+          headerTintColor: '#fff',
+        })}
       />
     </HomeStack.Navigator>
   );
