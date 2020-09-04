@@ -36,8 +36,8 @@ import {
 } from 'react-native-paper';
 import RootStackScreen from './screens/RootStackScreen';
 import {AuthContext} from './components/context';
-
 import AsyncStorage from '@react-native-community/async-storage';
+import LottieView from 'lottie-react-native';
 
 const Drawer = createDrawerNavigator();
 
@@ -161,13 +161,13 @@ const App = () => {
       }
       // console.log('user token: ', userToken);
       dispatch({type: 'RETRIEVE_TOKEN', token: userToken});
-    }, 1000);
+    }, 3500);
   }, []);
 
   if (loginState.isLoading) {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator size="large" />
+        <LottieView source={require('./assets/stayhome.json')} autoPlay loop />
       </View>
     );
   }
