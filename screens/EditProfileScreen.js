@@ -16,9 +16,7 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import ImagePicker from 'react-native-image-crop-picker';
 
 const EditProfileScreen = ({navigation}) => {
-  const [image, setImage] = useState(
-    'https://api.adorable.io/avatars/80/abott@adorable.png',
-  );
+  const [image, setImage] = useState('https://picsum.photos/200');
 
   const {colors} = useTheme();
 
